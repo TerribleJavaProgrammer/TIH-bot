@@ -13,7 +13,7 @@ CHANNEL_ID = int(os.environ.get("CHANNEL_ID"))
 intents = discord.Intents.default()
 bot = commands.Bot(command_prefix="TIH.", intents=intents)
 intents.message_content = True
-TIH_role = "TIH perms"
+TIH_role = "TIH ping"
 
 @bot.event
 async def on_ready():
@@ -23,6 +23,7 @@ async def on_ready():
         channel = bot.get_channel(CHANNEL_ID)
         if channel:
             await get_events(channel)
+            await get_events(bot.get_channel(1350208090707853535))
         else:
             print(f"Channel with ID {CHANNEL_ID} not found.")
 
@@ -31,9 +32,6 @@ async def on_ready():
 
 async def get_events(channel):
     role_name = TIH_role
-    if role_name == "PLACEHOLDER_ROLE":
-        await channel.send("TIH not set yet.")
-        return
 
     try:
         guild = channel.guild
