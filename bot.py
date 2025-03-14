@@ -22,7 +22,6 @@ async def on_ready():
         await bot.change_presence(activity=discord.Game(name="Browsing History"))
         channel = bot.get_channel(CHANNEL_ID)
         if channel:
-            await channel.send("Bot is online!")
             await get_events(channel)
         else:
             print(f"Channel with ID {CHANNEL_ID} not found.")
