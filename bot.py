@@ -45,7 +45,6 @@ async def get_events(channel):
                 self.channel = channel
                 self.guild = guild
                 self.author = author
-                self.author.roles = roles
             async def send(self, message):
                 await self.channel.send(message)
 
@@ -95,7 +94,7 @@ async def get_events(channel):
             output_string += event + "\n\n"
 
         await ctx.send(output_string)
-        await channel.send(discord.utils.get(guild.roles, id=1305223907992666173).mention)
+        await channel.send(discord.utils.get(guild.roles, name = role_name).mention)
     except Exception as e:
         await channel.send(f"An error occurred: {e}")
 
