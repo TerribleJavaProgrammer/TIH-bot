@@ -74,6 +74,9 @@ async def get_events(channel):
                 if date_tag:
                     year = date_tag.text.strip()
                     description = event.text.strip().replace(year, "").strip()
+                    if ('BC' in year):
+                        year = year.replace(' BC', "")
+                        description = 'BC ' + description
                     output_list.append(f"{year} - {description}")
                 else:
                     event_text = event.text.strip()
@@ -85,17 +88,23 @@ async def get_events(channel):
                         output_list.append(f"{year} - {description}")
                     else:
                         output_list.append(f"Missing date for event: {event_text}")
-
+        
         output_list.sort(key=lambda x: int(x.split(' - ')[0]))
         random_events = random.sample(output_list, min(10, len(output_list)))
         random_events.sort(key=lambda x: int(x.split(' - ')[0]))
 
         for event in random_events:
             output_string += event + "\n\n"
-
+            if (' - BC ' in event):
+                event.replace('BC', "", 1)
+                event.replace(' - ', ' BC - ', 1)
         await ctx.send(output_string)
         await channel.send(discord.utils.get(guild.roles, name = role_name).mention)
     except Exception as e:
-        await channel.send(f"An error occurred: {e}")
+        tb = sys.exc_info()[2]
+        traceback_info = traceback.extract_tb(tb)
+        filename, line_number, function_name, text = traceback_info[-1]
+        await channel.send(f"Error occurred in file: {filename}, line: {line_number}, function: {function_name}\nError: {e}")
+        await channel.send(<@{687801902762950680}>);
 
 bot.run(TOKEN)
