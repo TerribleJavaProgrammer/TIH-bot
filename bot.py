@@ -105,6 +105,5 @@ async def get_events(channel):
         traceback_info = traceback.extract_tb(tb)
         filename, line_number, function_name, text = traceback_info[-1]
         await channel.send(f"Error occurred in file: {filename}, line: {line_number}, function: {function_name}\nError: {e}")
-        await channel.send(<@{687801902762950680}>);
 
 bot.run(TOKEN)
