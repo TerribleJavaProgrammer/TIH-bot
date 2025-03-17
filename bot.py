@@ -6,6 +6,7 @@ import re
 import discord
 import random
 import os
+import sys
 
 TOKEN = os.environ.get("DISCORD_TOKEN")
 CHANNEL_ID = int(os.environ.get("CHANNEL_ID"))
@@ -24,6 +25,7 @@ async def on_ready():
         if channel:
             await get_events(channel)
             await get_events(bot.get_channel(1350208090707853535))
+        sys.exit()
         else:
             print(f"Channel with ID {CHANNEL_ID} not found.")
 
