@@ -26,8 +26,6 @@ async def on_ready():
             await get_events(channel)
             await get_events(bot.get_channel(1350208090707853535))
         sys.exit()
-        else:
-            print(f"Channel with ID {CHANNEL_ID} not found.")
 
     except Exception as e:
         print(f"command sync error: {e}")
